@@ -14,9 +14,10 @@ http://www.maxmind.com/app/ccv_overview
     gem.email = "tm@iprog.com"
     gem.homepage = "http://github.com/zarqman/maxmind"
     gem.authors = ["Adam Daniels", "Tinu Cleatus", 't.e.morgan']
-    gem.add_dependency 'activesupport', '>= 2.3'
-    gem.add_development_dependency('shoulda')
-    gem.add_development_dependency('matchy')
+    gem.add_dependency 'activesupport', '>= 3.0.0'
+    gem.add_development_dependency('shoulda', '>= 2.11.3')
+    gem.add_development_dependency('mcmire-matchy', '>= 0.5.2')
+    gem.add_development_dependency('fakeweb', '>= 1.3.0')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
