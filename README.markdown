@@ -1,12 +1,7 @@
-maxmind-rb
+maxmind
 ==========
 
 A wrapper around MaxMind's minFraud anti-fraud service.
-
-Installation
-------------
-	sudo gem install maxmind-rb
-	
 
 Dependencies
 ------------
