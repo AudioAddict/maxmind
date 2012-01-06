@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "maxmind-rb"
+    gem.name = "maxmind"
     gem.summary = "Wrapper for MaxMind's minFraud service"
     gem.description = <<-EOF
 A wrapper around MaxMind's minFraud anti-fraud service. 
@@ -48,17 +48,12 @@ end
 
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION.yml')
-    config = YAML.load(File.read('VERSION.yml'))
-    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
-  else
-    version = ""
-  end
+  version = File.read 'VERSION' rescue nil
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "maxmind-rb #{version}"
+  rdoc.title = "maxmind #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
