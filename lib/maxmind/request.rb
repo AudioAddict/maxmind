@@ -108,29 +108,26 @@ module Maxmind
       }
       
       field_set = required_fields.merge(optional_fields)
-      field_set.reject {|k, v| v.nil? }#.to_query
+      field_set.reject {|k, v| v.nil? }
     end
     
     # Upon a failure at the first URL, will automatically retry with the second one before finally raising an exception
     def post(query_params)
-      servers ||= ["https://minfraud2.maxmind.com/app/ccv2r", "https://minfraud1.maxmind.com/app/ccv2r", "https://minfraud3.maxmind.com/app/ccv2r"]
+      servers ||= ['https://minfraud-us-east.maxmind.com/app/ccv2r', 'https://minfraud-us-west.maxmind.com/app/ccv2r']
       url = URI.parse(servers.shift)
       
-      # req = Net::HTTP::Get.new("#{url.path}?#{query_string}")
-      req = Net::HTTP::Post.new("#{url.path}")
+      req = Net::HTTP::Post.new(url.path)
       req.set_form_data(query_params)
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
       h.verify_mode = OpenSSL::SSL::VERIFY_NONE
       response = h.start { |http| http.request(req) }
       response.body
-      
+
     rescue Exception => e
       retry if servers.size > 0
       raise e
     end
-    
-    
     
     protected
     def validate
