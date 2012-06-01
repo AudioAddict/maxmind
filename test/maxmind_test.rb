@@ -82,20 +82,11 @@ class MaxmindTest < Test::Unit::TestCase
     end
   end
   
-  #context "Requesting" do
-  #  setup do
-  #    request = Maxmind::Request.new('LICENSE_KEY', REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))
-  #    FakeWeb.register_uri(:get, "http://minfraud3.maxmind.com/app/ccv2r?" + request.query(true), :string => File.read(File.join(File.dirname(__FILE__), "fixtures/basic.txt")))
-  #    
-  #    @response = Maxmind::Response.new(request) 
-  #  end
-  #end
-  
   context "Response" do
     setup do
       Maxmind.license_key = 'LICENSE_KEY'
       request = Maxmind::Request.new(REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))     
-      FakeWeb.register_uri(:post, "https://minfraud1.maxmind.com/app/ccv2r", :body => File.read(File.join(File.dirname(__FILE__), "fixtures/response.txt")))
+      FakeWeb.register_uri(:post, "https://minfraud-us-east.maxmind.com/app/ccv2r", :body => File.read(File.join(File.dirname(__FILE__), "fixtures/response.txt")))
       
       @response = request.process!
     end

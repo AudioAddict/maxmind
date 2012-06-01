@@ -1,12 +1,15 @@
 module Maxmind
   # Your license key
   mattr_accessor :license_key
-  
+
   class Request
+    DefaultTimeout = 60
+
     # optionally set a default request type (one of 'standard' or 'premium')
     #   Maxmind's default behavior is to use premium if you have credits, else use standard
     mattr_accessor :default_request_type
     
+    mattr_accessor :timeout
     
     # Required Fields
     attr_accessor :client_ip, :city, :region, :postal, :country
@@ -118,9 +121,16 @@ module Maxmind
       
       req = Net::HTTP::Post.new(url.path)
       req.set_form_data(query_params)
+
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
       h.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      
+      # set some timeouts
+      h.open_timeout  = 60 # this blocks forever by default, lets be a bit less crazy.
+      h.read_timeout  = @@timeout || DefaultTimeout
+      h.ssl_timeout   = @@timeout || DefaultTimeout
+
       response = h.start { |http| http.request(req) }
       response.body
 
