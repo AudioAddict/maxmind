@@ -38,22 +38,18 @@ Gem::Specification.new do |s|
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
-
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<maxmind>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_development_dependency(%q<mcmire-matchy>, [">= 0.5.2"])
       s.add_development_dependency(%q<fakeweb>, [">= 1.3.0"])
       s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
     else
-      s.add_dependency(%q<maxmind>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_dependency(%q<mcmire-matchy>, [">= 0.5.2"])
       s.add_dependency(%q<fakeweb>, [">= 1.3.0"])
       s.add_dependency(%q<activesupport>, [">= 3.0.0"])
     end
   else
-    s.add_dependency(%q<maxmind>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 2.11.3"])
     s.add_dependency(%q<mcmire-matchy>, [">= 0.5.2"])
     s.add_dependency(%q<fakeweb>, [">= 1.3.0"])
